@@ -79,6 +79,10 @@ export class AndroidRemote extends EventEmitter {
         return this.remoteManager.sendKey(key, direction);
     }
 
+    sendText(text){
+        return this.remoteManager.sendText(text);
+    }
+
     getCertificate(){
         return {
             key:this.cert.key,

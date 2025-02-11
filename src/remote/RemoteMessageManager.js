@@ -112,6 +112,23 @@ class RemoteMessageManager {
         });
     }
 
+    createRemoteImeBatchEdit(text, imeCounter, fieldCounter) {
+        return this.create({
+            remoteImeBatchEdit: {
+                imeCounter,
+                fieldCounter,
+                editInfo: [{
+                    insert: 0,
+                    textFieldStatus: {
+                        start: text.length - 1,
+                        end: text.length - 1,
+                        value: text 
+                    }
+                }]
+            }
+        });
+    }
+
     parse(buffer){
         return this.RemoteMessage.decodeDelimited(buffer);
     }

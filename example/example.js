@@ -55,6 +55,12 @@ androidRemote.on('ready', async () => {
     await new Promise(resolve => setTimeout(resolve, 100));
     androidRemote.sendKey(RemoteKeyCode.KEYCODE_0, RemoteDirection.END_LONG)
 
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    androidRemote.sendText("Hello");
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    androidRemote.sendText(" World!");
+
     androidRemote.sendKey(RemoteKeyCode.KEYCODE_MUTE, RemoteDirection.SHORT)
     await new Promise(resolve => setTimeout(resolve, 10000));
     androidRemote.sendAppLink("https://www.disneyplus.com");

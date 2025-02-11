@@ -75,6 +75,7 @@ class RemoteManager extends EventEmitter {
                     }
                     else if(message.remoteImeBatchEdit){
                         console.debug("Receive IME BATCH EDIT" + message.remoteImeBatchEdit);
+                        this.remoteImeBatchEditResponse = JSON.parse(JSON.stringify(message.remoteImeBatchEdit));
                     }
                     else if(message.remoteImeShowRequest){
                         console.debug("Receive IME SHOW REQUEST" + message.remoteImeShowRequest);
@@ -165,6 +166,23 @@ class RemoteManager extends EventEmitter {
         this.client.write(remoteMessageManager.createRemoteKeyInject(
             direction,
             key));
+    }
+
+    sendText(text){
+        let _imeCounter = 0;
+        let _fieldCounter = 0;
+        if (this.remoteImeBatchEditResponse) {
+            if (this.remoteImeBatchEditResponse.imeCounter) {
+                _imeCounter = this.remoteImeBatchEditResponse.imeCounter;
+            }
+            if (this.remoteImeBatchEditResponse.fieldCounter) {
+                _fieldCounter = this.remoteImeBatchEditResponse.fieldCounter;
+            }
+        }
+        this.client.write(remoteMessageManager.createRemoteImeBatchEdit(
+            text,
+            _imeCounter,
+            _fieldCounter));
     }
 
     sendAppLink(app_link){

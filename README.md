@@ -50,6 +50,8 @@ androidRemote.on('ready', async () => {
 
     androidRemote.sendKey(RemoteKeyCode.MUTE, RemoteDirection.SHORT)
 
+    androidRemote.sendText("Hello World!")
+
     androidRemote.sendAppLink("https://www.disneyplus.com");
 });
 
@@ -81,6 +83,11 @@ Emitted when androidtv has a problem : by example when you send a wrong app_link
 
 ### `Command: sendCode(code)`
 - `code` : You need to pass the shown code on the TV when asked
+
+### `Command: sendText(text)`
+- `text` : You need to pass the text to send
+  * This may not work when virtual keyboard is open on TV
+  * To hide virtual keyboard, send `sendKey(RemoteKeyCode.KEYCODE_BACK, RemoteDirection.SHORT)`
 
 ### `Command: sendKey(KeyCode, Direction)`
 - `KeyCode` : Any key of https://developer.android.com/reference/android/view/KeyEvent?hl=fr
